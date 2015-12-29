@@ -46,8 +46,21 @@ int main() {
   } // Ultra Bad: double-delete of Bad
 
   {
-    std::shared_ptr<IFoo> fooPtr = std::make_shared<FooDerived>();
+    std::shared_ptr<IFoo> fooPtr = std::make_shared<FooDerived>(); // FooDerived Instantiate...
     std::shared_ptr<IFoo> foo2Ptr = fooPtr->getPtr();
-    std::cout << "foo2Ptr.use_count() = " << foo2Ptr.use_count() << '\n';
+    std::shared_ptr<FooDerived> foo3Ptr = std::static_pointer_cast<FooDerived>(fooPtr->getPtr()); // BAD but WORK
+    std::shared_ptr<FooDerived> foo4Ptr = std::dynamic_pointer_cast<FooDerived>(fooPtr->getPtr()); // OK
+    std::cout << "foo2Ptr.use_count() = " << foo2Ptr.use_count() << '\n'; // 4
+    std::cout << "foo3Ptr.use_count() = " << foo3Ptr.use_count() << '\n'; // 4
+    std::cout << "foo4Ptr.use_count() = " << foo4Ptr.use_count() << '\n'; // 4
+  }
+  {
+    std::shared_ptr<IFoo> fooPtr = std::make_shared<FooBase>(); // /!\ FooBase intantiate /!\ .
+    std::shared_ptr<IFoo> foo2Ptr = fooPtr->getPtr();
+    std::shared_ptr<FooDerived> foo3Ptr = std::static_pointer_cast<FooDerived>(fooPtr->getPtr()); // BAD could crash later on call
+    std::shared_ptr<FooDerived> foo4Ptr = std::dynamic_pointer_cast<FooDerived>(fooPtr->getPtr()); // OK foo4Ptr will be empty
+    std::cout << "foo2Ptr.use_count() = " << foo2Ptr.use_count() << '\n'; // 3
+    std::cout << "foo3Ptr.use_count() = " << foo3Ptr.use_count() << '\n'; // 3
+    std::cout << "foo4Ptr.use_count() = " << foo4Ptr.use_count() << '\n'; // 0
   }
 }
