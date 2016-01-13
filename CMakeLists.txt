@@ -23,5 +23,5 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_BUILD_TYP
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_BUILD_TYPE}/bin)
 
 add_subdirectory(shared_from_this)
-add_subdirectory(virtual_method_ctor)
+add_subdirectory(virtual_init_ctor)
 add_subdirectory(custom_iterator)
