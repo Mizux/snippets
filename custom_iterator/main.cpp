@@ -71,6 +71,18 @@ class MyContainer {
 	std::size_t size() const { return std::pow(n, 2); }
 	std::vector<std::vector<T>>& data() { return _data; }
 
+/*{
+		std::size_t count = 0;
+		for (auto const& it : container) {
+			stream << std::setw(4) << it << ' ';
+			if (++count == container.n) {
+				count = 0;
+				stream << std::endl;
+			}
+		}
+		return stream;
+	}*/
+
  private:
 	std::vector<std::vector<T>> _data;  // row major
 };
@@ -149,6 +161,9 @@ iteratorHilbert<T> make_HilbertIterator(U<T>& p) {
 		return iteratorHilbert<T>(p);
 }
 
+template <typename T>
+std::ostream& operator<<(std::ostream &stream, MyContainer<T>& container);
+
 int main() {
 	const std::size_t n = (1 << 3);
 	using ContainerInt = MyContainer<int>;
@@ -160,7 +175,8 @@ int main() {
 
 	std::iota(make_HilbertIterator(foo).begin(), make_HilbertIterator(foo).end(), 1);
 
-	std::cout << "foo content:" << std::endl;
+	std::cout << "foo content:" << std::endl << foo << std::endl;
+	/*
 	std::size_t count = 0;
 	for (auto const& it : foo) {
 		std::cout << std::setw(4) << it << ' ';
@@ -169,6 +185,7 @@ int main() {
 			std::cout << std::endl;
 		}
 	}
+	*/
 
 	/*std::cout << "hilbert curve:" << std::endl;
 	for (std::size_t y=0; y < n; ++y) {
@@ -182,6 +199,23 @@ int main() {
 								<< std::endl;
 		}
 	}*/
+}
+
+///////////////////
+//  MyContainer  //
+///////////////////
+
+template <typename T>
+std::ostream& operator<<(std::ostream &stream, MyContainer<T>& container) {
+	std::size_t count = 0;
+	for (auto const& it : container) {
+		stream << std::setw(4) << it << ' ';
+		if (++count == container.n) {
+			count = 0;
+			stream << std::endl;
+		}
+	}
+	return stream;
 }
 
 ///////////////////////
