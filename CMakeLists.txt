@@ -16,7 +16,7 @@ set(INSTALL_INCLUDE_DIR include CACHE PATH "Installation directory for header fi
 ##############################
 ##  COMPILATION PARAMETERS  ##
 ##############################
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra")
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_BUILD_TYPE}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_BUILD_TYPE}/lib)
@@ -25,3 +25,4 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_BUILD_TYP
 add_subdirectory(shared_from_this)
 add_subdirectory(virtual_init_ctor)
 add_subdirectory(custom_iterator)
+add_subdirectory(xmacro)
