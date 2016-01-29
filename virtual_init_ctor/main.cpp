@@ -3,13 +3,13 @@
 
 // Show that virtual method are not overloaded in constructor
 
-class Base {
+class Bad {
  public:
-  Base() {
+  Bad() {
     init();
     std::cout << "Base::Base() called\n";
   }
-  virtual ~Base() { std::cout << "Base::~Base() called\n"; }
+  virtual ~Bad() { std::cout << "Base::~Base() called\n"; }
   virtual void foo() { std::cout << "Base::foo() called\n"; }
   void bar() { std::cout << "Base::bar() called\n"; }
 
@@ -17,7 +17,7 @@ class Base {
   virtual void init() { std::cout << "Base::init() called\n"; }
 };
 
-class Derived : public Base {
+class Derived : public Bad {
  public:
   Derived() {
     init();
@@ -32,8 +32,8 @@ class Derived : public Base {
 };
 
 int main() {
-  std::shared_ptr<Base> basePtr =
-      std::make_shared<Derived>();  // call both init functions !
+  std::shared_ptr<Bad> basePtr =
+    std::make_shared<Derived>();  // call both init functions !
 
   basePtr->foo();                                      // call Derived method !
   std::dynamic_pointer_cast<Derived>(basePtr)->foo();  // call Derived Method

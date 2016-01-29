@@ -28,7 +28,6 @@ class iterator {
   Matrix<T>& _mat;
   std::size_t _pos;
 };
-
 }
 
 #include "details/hilbert_iterator.hxx"
