@@ -38,31 +38,40 @@ class transitive_ptr : public std::unique_ptr<T, Deleter> {
 }
 
 struct Foo {
-  Foo() : w(new int), x(new int), y(new int), z(new int) {}
-  int* w;
-  int const* x;
+  int a;
+};
 
-  std::unique_ptr<int> y;
-  std::transitive_ptr<int> z;
+struct Bar {
+  Bar() : x(new Foo), y(new Foo), z(new Foo) {}
+  std::unique_ptr<Foo> x;
+  std::unique_ptr<const Foo> y;
+  std::transitive_ptr<Foo> z;
+
+  void constMethod() const {
+    x->a = 42;
+    //y->a = 42; // y is const...
+    //z->a = 42; // GOOD method is const thus z is const !
+  }
+  void method() {
+    x->a = 42;
+    const_cast<Foo&>(*y).a = 42; // BAD need const_cast ugly
+    z->a = 42; // GOOD method is not const thus z is not !
+  }
 };
 
 int main() {
-  Foo foo;
-  *foo.w = 1;
-  //*foo.x = 1; // Bad compile fail !
-  *foo.y = 1;
-  *foo.z = 1;
+  Bar a;
+  a.constMethod();
+  a.method();
 
-  const Foo bar;
-  *bar.w = 1;  // Bad no transitivity of const
-  //*foo._y = 1; // OK compile fail !
-  *bar.y = 1;  // Bad no transitivity of const
-  //*bar.z = 1; // OK compile fail !
+  const Bar b;
+  b.constMethod();
+  //b.method(); // b is const !
 }
 
 //  // Big Five
-//  Bad(const Bad&) = default;
-//  Bad& operator=(const Bad&) = default;
-//  Bad(Bad&&) = default;
-//  Bad& operator=(Bad&&) = default;
-//  virtual ~Bad() = default;
+//  Foo(const Foo&) = default;  // cpy ctor
+//  Foo& operator=(const Foo&) = default; // cpy assignement
+//  Foo(Foo&&) = default; // move ctor
+//  Foo& operator=(Foo&&) = default; // move assignement
+//  virtual ~Foo() = default; // dtor
