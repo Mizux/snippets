@@ -6,9 +6,9 @@ struct Good : std::enable_shared_from_this<Good> {
   ~Good() { std::cout << "Good::~Good() called\n"; }
 };
 
-struct Bad {
-  std::shared_ptr<Bad> getptr() { return std::shared_ptr<Bad>(this); }
-  ~Bad() { std::cout << "Bad::~Bad() called\n"; }
+struct Base {
+  std::shared_ptr<Base> getptr() { return std::shared_ptr<Base>(this); }
+  ~Base() { std::cout << "Bad::~Bad() called\n"; }
 };
 
 struct IFoo {
@@ -40,8 +40,8 @@ int main() {
   }
 
   {  // Bad, each shared_ptr thinks it's the only owner of the object
-    std::shared_ptr<Bad> bp1(new Bad);
-    std::shared_ptr<Bad> bp2 = bp1->getptr();
+    std::shared_ptr<Base> bp1(new Base);
+    std::shared_ptr<Base> bp2 = bp1->getptr();
     std::cout << "bp2.use_count() = " << bp2.use_count() << '\n';
   }  // Ultra Bad: double-delete of Bad
 

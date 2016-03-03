@@ -3,13 +3,13 @@
 
 // Show that virtual method are not overloaded in constructor
 
-class Bad {
+class Base {
  public:
-  Bad() {
+	Base() {
     init();
     std::cout << "Base::Base() called\n";
   }
-  virtual ~Bad() { std::cout << "Base::~Base() called\n"; }
+	virtual ~Base() { std::cout << "Base::~Base() called\n"; }
   virtual void foo() { std::cout << "Base::foo() called\n"; }
   void bar() { std::cout << "Base::bar() called\n"; }
 
@@ -17,22 +17,22 @@ class Bad {
   virtual void init() { std::cout << "Base::init() called\n"; }
 };
 
-class Derived : public Bad {
+class Derived : public Base {
  public:
   Derived() {
     init();
     std::cout << "Derived::Derived() called\n";
   }
-  virtual ~Derived() { std::cout << "Derived::~Deriv() called\n"; }
-  virtual void foo() { std::cout << "Derived::foo() called\n"; }
-  void bar() { std::cout << "Derived::bar() called\n"; }
+	~Derived() override { std::cout << "Derived::~Deriv() called\n"; }
+	void foo() override { std::cout << "Derived::foo() called\n"; }
+	void bar() { std::cout << "Derived::bar() called\n"; }
 
  protected:
-  virtual void init() { std::cout << "Derived::init() called\n"; }
+	void init() override { std::cout << "Derived::init() called\n"; }
 };
 
 int main() {
-  std::shared_ptr<Bad> basePtr =
+	std::shared_ptr<Base> basePtr =
     std::make_shared<Derived>();  // call both init functions !
 
   basePtr->foo();                                      // call Derived method !
