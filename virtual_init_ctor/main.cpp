@@ -6,23 +6,23 @@
 class Base {
  public:
 	Base() {
-    init();
-    std::cout << "Base::Base() called\n";
-  }
+		init();
+		std::cout << "Base::Base() called\n";
+	}
 	virtual ~Base() { std::cout << "Base::~Base() called\n"; }
-  virtual void foo() { std::cout << "Base::foo() called\n"; }
-  void bar() { std::cout << "Base::bar() called\n"; }
+	virtual void foo() { std::cout << "Base::foo() called\n"; }
+	void bar() { std::cout << "Base::bar() called\n"; }
 
  protected:
-  virtual void init() { std::cout << "Base::init() called\n"; }
+	virtual void init() { std::cout << "Base::init() called\n"; }
 };
 
 class Derived : public Base {
  public:
-  Derived() {
-    init();
-    std::cout << "Derived::Derived() called\n";
-  }
+	Derived() {
+		init();
+		std::cout << "Derived::Derived() called\n";
+	}
 	~Derived() override { std::cout << "Derived::~Deriv() called\n"; }
 	void foo() override { std::cout << "Derived::foo() called\n"; }
 	void bar() { std::cout << "Derived::bar() called\n"; }
@@ -31,13 +31,14 @@ class Derived : public Base {
 	void init() override { std::cout << "Derived::init() called\n"; }
 };
 
-int main() {
+int
+main() {
 	std::shared_ptr<Base> basePtr =
-    std::make_shared<Derived>();  // call both init functions !
+	  std::make_shared<Derived>(); // call both init functions !
 
-  basePtr->foo();                                      // call Derived method !
-  std::dynamic_pointer_cast<Derived>(basePtr)->foo();  // call Derived Method
+	basePtr->foo();                                     // call Derived method !
+	std::dynamic_pointer_cast<Derived>(basePtr)->foo(); // call Derived Method
 
-  basePtr->bar();                                      // call Base method .
-  std::dynamic_pointer_cast<Derived>(basePtr)->bar();  // call Derived method
+	basePtr->bar();                                     // call Base method .
+	std::dynamic_pointer_cast<Derived>(basePtr)->bar(); // call Derived method
 }

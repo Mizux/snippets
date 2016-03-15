@@ -2,10 +2,11 @@
 #include <algorithm>
 
 template <class InputIterator, class ValueIterator>
-std::vector<InputIterator> find_tuple(InputIterator first,
-																			InputIterator last,
-																			ValueIterator valFirst,
-																			ValueIterator valLast) {
+std::vector<InputIterator>
+find_tuple(InputIterator first,
+           InputIterator last,
+           ValueIterator valFirst,
+           ValueIterator valLast) {
 	std::vector<InputIterator> inputs(std::distance(first, last));
 	std::iota(inputs.begin(), inputs.end(), first);
 
@@ -13,21 +14,22 @@ std::vector<InputIterator> find_tuple(InputIterator first,
 	result.reserve(std::distance(valFirst, valLast));
 
 	// Find first element equal to v, remove it from inputs and add it to res.
-	// need "const auto&" (c++14) to work with std::array (return T* not an iterator on begin()/end() )
+	// need "const auto&" (c++14) to work with std::array (return T* not an
+	// iterator on begin()/end() )
 	auto func = [&result, &inputs](const auto& v) {
-	 for (auto it = inputs.begin(); it != inputs.end(); ++it) {
-		 if (**it == v) {
-			 result.push_back(*it);
-			 inputs.erase(it);
-			 break;
-		 }
-	 }
+		for (auto it = inputs.begin(); it != inputs.end(); ++it) {
+			if (**it == v) {
+				result.push_back(*it);
+				inputs.erase(it);
+				break;
+			}
+		}
 	};
 	std::for_each(valFirst, valLast, func);
 	if (result.size() == std::distance(valFirst, valLast))
 		return result;
 	else
-	 return std::vector<InputIterator>();
+		return std::vector<InputIterator>();
 }
 
 #include <list>
@@ -36,7 +38,8 @@ std::vector<InputIterator> find_tuple(InputIterator first,
 #include <algorithm>
 #include <iostream>
 
-int main() {
+int
+main() {
 	std::list<int> l(10);
 	std::iota(l.begin(), l.end(), 0);
 
