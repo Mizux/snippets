@@ -1,5 +1,6 @@
 #include <vector>
 #include <algorithm>
+#include <numeric>
 
 template <class InputIterator, class ValueIterator>
 std::vector<InputIterator>
