@@ -7,8 +7,8 @@ O--> "u"
 v "v"
 ```
 
-Quadrant Pattern
-----------------
+# Quadrant Pattern
+
 ```
 +---+ +---+ +---+
 |I O| |I O| |I-.|
@@ -16,9 +16,8 @@ Quadrant Pattern
 |'-'| |'-'| |'-O|
 +---+ +---+ +---+
 ```
-Curves
-------
-* Hilbert Curve
+# Curves
+## Hilbert Curve
 ```
 +-------+
 |I-. .-O|
@@ -30,7 +29,7 @@ Curves
 |'-' '-'|
 +-------+
 ```
-* Moore Curve
+## Moore Curve
 ```
 +-------+
 |.-I O-.|
@@ -42,7 +41,7 @@ Curves
 |'-o-i-'|
 +-------+
 ```
-* Z Curve
+## Z Curve
 ```
 +-------+
 |I-. i-.|
