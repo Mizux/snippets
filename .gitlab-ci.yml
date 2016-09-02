@@ -1,6 +1,5 @@
 my_project:
   script:
-    - cd apps/my_project
     - mkdir build
     - cd build
     - cmake ..
