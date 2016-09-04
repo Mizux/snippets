@@ -6,7 +6,6 @@ before_script:
 
 my_project:
   script:
-    - mkdir build
-    - cd build
+    - mkdir build && cd build
     - cmake ..
     - make
