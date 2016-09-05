@@ -1,5 +1,5 @@
-#include <memory>
 #include <iostream>
+#include <memory>
 
 struct Good : std::enable_shared_from_this<Good> {
 	std::shared_ptr<Good> getptr() { return shared_from_this(); }

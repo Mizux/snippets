@@ -1,6 +1,6 @@
-#include <vector>
 #include <algorithm>
 #include <numeric>
+#include <vector>
 
 template <class InputIterator, class ValueIterator>
 std::vector<InputIterator>
@@ -33,11 +33,11 @@ find_tuple(InputIterator first,
 		return std::vector<InputIterator>();
 }
 
+#include <algorithm>
+#include <array>
+#include <iostream>
 #include <list>
 #include <set>
-#include <array>
-#include <algorithm>
-#include <iostream>
 
 int
 main() {

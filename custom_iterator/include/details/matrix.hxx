@@ -6,39 +6,44 @@
 
 template <typename T>
 Matrix<T>::Matrix(std::size_t n, const T& value)
-	: n(n), data(n, std::vector<T>(n, value)) {
-	if ((n == 0) || (n & (n - 1)))
-		throw std::runtime_error("N must be a power of two.");
-	//std::cout << "Matrix::Matrix() called\n";
+  : n(n)
+  , data(n, std::vector<T>(n, value)) {
+	if ((n == 0) || (n & (n - 1))) throw std::runtime_error("N must be a power of two.");
+	// std::cout << "Matrix::Matrix() called\n";
 }
 
 template <typename T>
 Matrix<T>::~Matrix() {
-	//std::cout << "Matrix::~Matrix() called\n";
+	// std::cout << "Matrix::~Matrix() called\n";
 }
 
 template <typename T>
-std::size_t Matrix<T>::size() const {
+std::size_t
+Matrix<T>::size() const {
 	return std::pow(n, 2);
 }
 
 template <typename T>
-typename Matrix<T>::iterator Matrix<T>::begin() {
+typename Matrix<T>::iterator
+Matrix<T>::begin() {
 	return iterator(*this);
 }
 
 template <typename T>
-typename Matrix<T>::iterator Matrix<T>::end() {
+typename Matrix<T>::iterator
+Matrix<T>::end() {
 	return iterator(*this, size());
 }
 
 template <typename T>
-typename Matrix<T>::const_iterator Matrix<T>::begin() const {
+typename Matrix<T>::const_iterator
+Matrix<T>::begin() const {
 	return const_iterator(*this);
 }
 
 template <typename T>
-typename Matrix<T>::const_iterator Matrix<T>::end() const {
+typename Matrix<T>::const_iterator
+Matrix<T>::end() const {
 	return const_iterator(*this, size());
 }
 
@@ -48,17 +53,22 @@ typename Matrix<T>::const_iterator Matrix<T>::end() const {
 
 template <typename T>
 Matrix<T>::iterator::iterator(Matrix<T>& mat, std::size_t pos)
-	: _mat(mat), _pos(pos) {}
+  : _mat(mat)
+  , _pos(pos) {}
 
 template <typename T>
-bool Matrix<T>::iterator::operator==(const iterator& rhs) {
+bool
+Matrix<T>::iterator::operator==(const iterator& rhs) {
 	if (&_mat != &rhs._mat)
 		throw std::runtime_error("iterator not on the same container");
 	return _pos == rhs._pos;
 }
 
 template <typename T>
-bool Matrix<T>::iterator::operator!=(const iterator& rhs) { return !(*this == rhs); }
+bool
+Matrix<T>::iterator::operator!=(const iterator& rhs) {
+	return !(*this == rhs);
+}
 
 template <typename T>
 T& Matrix<T>::iterator::operator*() {
@@ -66,26 +76,26 @@ T& Matrix<T>::iterator::operator*() {
 }
 
 template <typename T>
-typename Matrix<T>::iterator& Matrix<T>::iterator::operator++() {  // prefix
+typename Matrix<T>::iterator& Matrix<T>::iterator::operator++() { // prefix
 	++_pos;
 	return *this;
 }
 
 template <typename T>
-typename Matrix<T>::iterator Matrix<T>::iterator::operator++(int) {  // postfix
+typename Matrix<T>::iterator Matrix<T>::iterator::operator++(int) { // postfix
 	iterator res(_mat, _pos);
 	++(*this);
 	return res;
 }
 
 template <typename T>
-typename Matrix<T>::iterator& Matrix<T>::iterator::operator--() {  // prefix
+typename Matrix<T>::iterator& Matrix<T>::iterator::operator--() { // prefix
 	--_pos;
 	return *this;
 }
 
 template <typename T>
-typename Matrix<T>::iterator Matrix<T>::iterator::operator--(int) {  // postfix
+typename Matrix<T>::iterator Matrix<T>::iterator::operator--(int) { // postfix
 	iterator res(_mat, _pos);
 	--(*this);
 	return res;
@@ -97,17 +107,22 @@ typename Matrix<T>::iterator Matrix<T>::iterator::operator--(int) {  // postfix
 
 template <typename T>
 Matrix<T>::const_iterator::const_iterator(const Matrix<T>& mat, std::size_t pos)
-	: _mat(mat), _pos(pos) {}
+  : _mat(mat)
+  , _pos(pos) {}
 
 template <typename T>
-bool Matrix<T>::const_iterator::operator==(const const_iterator& rhs) {
+bool
+Matrix<T>::const_iterator::operator==(const const_iterator& rhs) {
 	if (&_mat != &rhs._mat)
 		throw std::runtime_error("const_iterator not on the same container");
 	return _pos == rhs._pos;
 }
 
 template <typename T>
-bool Matrix<T>::const_iterator::operator!=(const const_iterator& rhs) { return !(*this == rhs); }
+bool
+Matrix<T>::const_iterator::operator!=(const const_iterator& rhs) {
+	return !(*this == rhs);
+}
 
 template <typename T>
 const T& Matrix<T>::const_iterator::operator*() {
@@ -115,26 +130,28 @@ const T& Matrix<T>::const_iterator::operator*() {
 }
 
 template <typename T>
-typename Matrix<T>::const_iterator& Matrix<T>::const_iterator::operator++() {  // prefix
+typename Matrix<T>::const_iterator& Matrix<T>::const_iterator::operator++() { // prefix
 	++_pos;
 	return *this;
 }
 
 template <typename T>
-typename Matrix<T>::const_iterator Matrix<T>::const_iterator::operator++(int) {  // postfix
+typename Matrix<T>::const_iterator Matrix<T>::const_iterator::operator++(
+  int) { // postfix
 	const_iterator res(_mat, _pos);
 	++(*this);
 	return res;
 }
 
 template <typename T>
-typename Matrix<T>::const_iterator& Matrix<T>::const_iterator::operator--() {  // prefix
+typename Matrix<T>::const_iterator& Matrix<T>::const_iterator::operator--() { // prefix
 	--_pos;
 	return *this;
 }
 
 template <typename T>
-typename Matrix<T>::const_iterator Matrix<T>::const_iterator::operator--(int) {  // postfix
+typename Matrix<T>::const_iterator Matrix<T>::const_iterator::operator--(
+  int) { // postfix
 	const_iterator res(_mat, _pos);
 	--(*this);
 	return res;
@@ -145,7 +162,8 @@ typename Matrix<T>::const_iterator Matrix<T>::const_iterator::operator--(int) { 
 ////////////
 
 template <typename T>
-std::ostream& operator<<(std::ostream &stream, const Matrix<T>& mat) {
+std::ostream&
+operator<<(std::ostream& stream, const Matrix<T>& mat) {
 	std::size_t count = 0;
 	for (auto const& it : mat) {
 		stream << std::setw(4) << it << ' ';

@@ -24,7 +24,7 @@ struct Matrix {
 
 	//! @{
 	class const_iterator {
-	 public:
+		public:
 		const_iterator(const Matrix& mat, std::size_t pos = 0);
 
 		bool operator==(const const_iterator& rhs);
@@ -34,7 +34,7 @@ struct Matrix {
 		const_iterator operator++(int); // postfix
 		const_iterator& operator--();   // prefix
 		const_iterator operator--(int); // postfix
-	 private:
+		private:
 		const Matrix& _mat;
 		std::size_t _pos;
 	};
@@ -45,7 +45,7 @@ struct Matrix {
 
 	//! @{
 	class iterator {
-	 public:
+		public:
 		iterator(Matrix& mat, std::size_t pos = 0);
 
 		bool operator==(const iterator& rhs);
@@ -55,7 +55,7 @@ struct Matrix {
 		iterator operator++(int); // postfix
 		iterator& operator--();   // prefix
 		iterator operator--(int); // postfix
-	 private:
+		private:
 		Matrix& _mat;
 		std::size_t _pos;
 	};

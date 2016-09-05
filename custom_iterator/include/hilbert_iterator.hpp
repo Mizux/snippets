@@ -6,7 +6,7 @@ namespace hilbert {
 //! @class iterator_hilbert 2D hilbert curve iterator.
 template <typename T>
 class iterator {
- public:
+	public:
 	iterator(Matrix<T>& mat, std::size_t pos = 0);
 	~iterator();
 
@@ -24,7 +24,7 @@ class iterator {
 	std::size_t XYToBinary(Vector<std::size_t> vec) const;
 	Vector<std::size_t> BinaryToXY(std::size_t d) const;
 
- private:
+	private:
 	Matrix<T>& _mat;
 	std::size_t _pos;
 };

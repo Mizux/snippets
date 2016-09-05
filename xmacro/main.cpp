@@ -29,7 +29,8 @@ main() {
 	} // warning since BAR is not managed with -Wswitch-enum
 }
 
-std::ostream& operator<<(std::ostream& stream, const FooBar& value) {
+std::ostream&
+operator<<(std::ostream& stream, const FooBar& value) {
 	static const std::map<FooBar, std::string> fooBarNames = {
 #define X(name) \
 	{ FooBar::name, #name } //!< @brief XMacro stuff.

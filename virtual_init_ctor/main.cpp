@@ -1,10 +1,10 @@
-#include <memory>
 #include <iostream>
+#include <memory>
 
 // Show that virtual method are not overloaded in constructor
 
 class Base {
- public:
+	public:
 	Base() {
 		init();
 		std::cout << "Base::Base() called\n";
@@ -13,12 +13,12 @@ class Base {
 	virtual void foo() { std::cout << "Base::foo() called\n"; }
 	void bar() { std::cout << "Base::bar() called\n"; }
 
- protected:
+	protected:
 	virtual void init() { std::cout << "Base::init() called\n"; }
 };
 
 class Derived : public Base {
- public:
+	public:
 	Derived() {
 		init();
 		std::cout << "Derived::Derived() called\n";
@@ -27,7 +27,7 @@ class Derived : public Base {
 	void foo() override { std::cout << "Derived::foo() called\n"; }
 	void bar() { std::cout << "Derived::bar() called\n"; }
 
- protected:
+	protected:
 	void init() override { std::cout << "Derived::init() called\n"; }
 };
 

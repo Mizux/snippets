@@ -1,6 +1,6 @@
-#include <vector>
-#include <memory>
 #include <iostream>
+#include <memory>
+#include <vector>
 
 // Small example where a Class (Foo) contain a polymorphe element (int*)
 // How manage to get transitivity of const ?
@@ -9,7 +9,7 @@
 namespace std {
 template <class T, class Deleter = std::default_delete<T>>
 class transitive_ptr : public std::unique_ptr<T, Deleter> {
- public:
+	public:
 	// inherit typedefs for the sake of completeness
 	typedef typename std::unique_ptr<T, Deleter>::pointer pointer;
 	typedef typename std::unique_ptr<T, Deleter>::element_type element_type;
@@ -27,9 +27,7 @@ class transitive_ptr : public std::unique_ptr<T, Deleter> {
 
 	// add transitively const version of operator*()
 	typename std::add_lvalue_reference<T>::type operator*() { return *get(); }
-	typename std::add_lvalue_reference<const T>::type operator*() const {
-		return *get();
-	}
+	typename std::add_lvalue_reference<const T>::type operator*() const { return *get(); }
 
 	// add transitively const version of operator->()
 	pointer operator->() { return get(); }
@@ -56,9 +54,9 @@ struct Bar {
 		// z->a = 42; // GOOD method is const thus z is const !
 	}
 	void method() {
-		x->a = 42;
+		x->a                   = 42;
 		const_cast<Foo&>(*y).a = 42; // BAD need const_cast ugly
-		z->a = 42;                   // GOOD method is not const thus z is not !
+		z->a                   = 42; // GOOD method is not const thus z is not !
 	}
 };
 

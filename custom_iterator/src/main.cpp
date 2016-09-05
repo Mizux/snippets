@@ -1,13 +1,13 @@
-#include <vector>
-#include <numeric>
 #include <cmath>
-#include <iostream>
 #include <iomanip>
+#include <iostream>
+#include <numeric>
 #include <stdexcept>
+#include <vector>
 
-#include <matrix.hpp>
-#include <hilbert_iterator.hpp>
 #include <graycode_iterator.hpp>
+#include <hilbert_iterator.hpp>
+#include <matrix.hpp>
 
 int
 main() {
