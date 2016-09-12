@@ -1,10 +1,14 @@
 image: ubuntu:latest
 
+stages:
+  - build
+
 before_script:
    - apt-get update
    - apt-get install -qq git build-essential cmake doxygen cppcheck
 
-my_project:
+build:linux:
+  stage: build
   script:
     - mkdir build && cd build
     - cmake ..
