@@ -1,11 +1,7 @@
-image: ubuntu:latest
+image: mizux/cpp:latest
 
 stages:
   - build
-
-before_script:
-   - apt-get update
-   - apt-get install -qq git build-essential cmake doxygen cppcheck
 
 build:linux:
   stage: build
