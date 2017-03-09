@@ -3,7 +3,7 @@
 #include "matrix.hpp"
 
 namespace graycode {
-//! @class iterator_hilbert 2D hilbert curve iterator.
+//! @class iterator_graycode 2D hilbert curve iterator.
 template <typename T>
 class iterator {
 	public:
