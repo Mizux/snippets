@@ -35,8 +35,7 @@ main() {
 std::ostream&
 operator<<(std::ostream& stream, const FooBar& value) {
 	static const std::map<FooBar, std::string> fooBarNames = {
-#define X(name) \
-	{ FooBar::name, #name } //!< @brief XMacro stuff.
+#define X(name) { FooBar::name, #name } //!< @brief XMacro stuff.
 	  FOOBAR_LIST
 #undef X
 	};
