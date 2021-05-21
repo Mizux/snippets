@@ -1,7 +1,10 @@
 #include <iostream>
 #include <map>
 
-#define FOOBAR_LIST X(FOO), X(BAR), X(INVALID)
+#define FOOBAR_LIST \
+ X(FOO), \
+ X(BAR), \
+ X(INVALID)
 
 enum class FooBar {
 #define X(name) name //!< @brief XMacro stuff.
