@@ -10,3 +10,6 @@ target_include_directories(${_NAME} PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>)
 
+if(BUILD_TESTING)
+  add_test(NAME cxx_${_NAME} COMMAND ${_NAME})
+endif()

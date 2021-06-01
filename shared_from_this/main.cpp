@@ -40,11 +40,13 @@ main() {
 		std::cout << "gp2.use_count() = " << gp2.use_count() << '\n';
 	}
 
+#if 0
 	{ // Bad, each shared_ptr thinks it's the only owner of the object
 		std::shared_ptr<Base> bp1(new Base);
 		std::shared_ptr<Base> bp2 = bp1->getptr();
 		std::cout << "bp2.use_count() = " << bp2.use_count() << '\n';
 	} // Ultra Bad: double-delete of Bad
+#endif
 
 	{
 		std::shared_ptr<IFoo> fooPtr =
